@@ -5,6 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+/**
+ * Main Activity file for my app. I just find all the XML objects and set the
+ * listeners in this class.
+ *
+ * @author Spencer Nelson
+ * @version Spring 2019
+ *
+ */
 public class MainActivity extends AppCompatActivity {
 
     /* Create instances of all objects that will be used */

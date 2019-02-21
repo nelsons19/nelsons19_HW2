@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 /**
  * This class defines the listener for the custom surface view as well as the
- * seek bars. It handles all on touch and progress changed events.
+ * seek bars. It handles all on touch and progress changed events from the user.
  *
  * @author Spencer Nelson
  * @version Spring 2019
@@ -17,9 +17,7 @@ import android.widget.TextView;
 public class Listener implements View.OnTouchListener,
         SeekBar.OnSeekBarChangeListener {
 
-    /**
-     * Instance variables for the listener class
-     */
+    /* Instance variables for the listener class */
     private SurfaceController SurfaceController;
 
     private CustomElement selectedElement;
@@ -46,7 +44,7 @@ public class Listener implements View.OnTouchListener,
                     TextView passedInName, TextView passedRedTV,
                     TextView passedGreenTV, TextView passedBlueTV){
 
-        /* set all the instance variables based on constructor */
+        /* set all the instance variables based on constructor values */
         SurfaceController = passedInSurfaceController;
         redBar = redSB;
         greenBar = greenSB;
@@ -77,12 +75,12 @@ public class Listener implements View.OnTouchListener,
         int xTap = (int)event.getX();
         int yTap = (int)event.getY();
 
-        /* determine which drawing was touched by used and set the seek bars
-         * based in the color of the touched element */
+        /* determine which drawing was touched by user and set it as the
+         * selected element so it can be accessed later.Then adjust the seek
+         * bars based in the color of the touched element */
         if( SurfaceController.lPupil.containsPoint(xTap, yTap)){
             selectedElement = SurfaceController.lPupil;
             setSeekBars(SurfaceController.lPupil);
-
         }
         else if (SurfaceController.lEye.containsPoint(xTap, yTap)){
             selectedElement = SurfaceController.lEye;
@@ -105,7 +103,7 @@ public class Listener implements View.OnTouchListener,
             setSeekBars(SurfaceController.head);
         }
 
-        /* Force a redraw after surface view modification */
+        /* Force a redraw after seek bar modifications */
         SurfaceController.invalidate();
         return true;
     }
@@ -123,7 +121,12 @@ public class Listener implements View.OnTouchListener,
          /how-can-i-get-red-value-from-rgb-value-android
          Solution: I used the example code from this post.
          */
+        /* create a temporary color integer so I can obtain the RGB values */
         int tempColor = passedInElement.getColor();
+
+        /* set the RGB values based on the selected element. These values will
+         * be used later to adjust the color of the selected element based on
+         * seek bar positions */
         red = (tempColor >> 16) & 0xFF;
         green = (tempColor >> 8) & 0xFF;
         blue = (tempColor >> 0) & 0xFF;

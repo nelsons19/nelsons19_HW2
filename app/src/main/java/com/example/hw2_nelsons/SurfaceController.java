@@ -15,6 +15,7 @@ import android.view.SurfaceView;
  */
 public class SurfaceController extends SurfaceView {
 
+    /* Created all the shapes that will be drawn on the surface veiw */
     protected CustomCircle head = new CustomCircle("head",
             0xFFFFE0BD,600,600,600);
     protected CustomCircle lEye = new CustomCircle("left eye",
@@ -61,6 +62,7 @@ public class SurfaceController extends SurfaceView {
         /* Set canvas background color */
         canvas.drawColor(0xFFFFFFFF);
 
+        /* Draw the elements */
         head.drawMe(canvas);
         lEye.drawMe(canvas);
         rEye.drawMe(canvas);
